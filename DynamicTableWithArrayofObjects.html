@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+td{padding:3px}
+th{background:green;color:#fff}
+tr:nth-child(even) {background: #cfcfcf}
+tr:nth-child(odd) {background: #FFF}
+</style>
+<script>
+function CreateArray(){
+  var arr = [];
+  for(var i = 0 ; i < 10; i++){    
+    arr.push({
+      firstName:"SS",
+      lastName:"KS",
+      email:"ss"+i.toString()+"@gmail.com"
+    }); 
+  } 
+  return arr;
+}
+function myLoadComplete(){
+var arrayLi = CreateArray();
+CreateTable(arrayLi);
+}
+
+function SelectAllEmails(source){
+	checkboxes = document.getElementsByName('checkboxtbl');
+	for(var i in checkboxes)
+			checkboxes[i].checked = source.checked;
+}
+
+function CreateTable(data) {   
+  var tableStr = [];
+  var j = -1;
+
+  tableStr[++j] = '<table class="tftable" border="1"><thead><tr><th><input type="checkbox" id="allEmails" onclick = "SelectAllEmails(this)"/></th><th>S.NO</th><th>First Name</th><th>Family Name</th><th>Email</th></tr></thead><tbody>';
+
+  for (var i = 0; i < data.length; i++) {
+    tableStr[++j] = '<tr><td>';
+    tableStr[++j] = '<input type= "checkbox"';
+    tableStr[++j] = 'id =' + "chbxEmail" + i.toString() +" "+' name="checkboxtbl" onclick =' + "foo(this)"+" "+'/>';
+    tableStr[++j] = '</td><td>';
+    tableStr[++j] = i+1;
+    tableStr[++j] = '</td><td>';
+    tableStr[++j] =  data[i].firstName;
+    tableStr[++j] = '</td><td>';
+    tableStr[++j] = data[i].lastName;
+    tableStr[++j] = '</td><td><a href="mailto:'+data[i].email+'?Subject=Subject text here&cc=testmail@gmail.com;testmail-1@gmail.com;&bcc=123@gmail.com&body=body text"  target="_top">';
+    tableStr[++j] = data[i].email;
+    tableStr[++j] = '</a></td></tr>';
+  }
+  tableStr[++j] = '</tbody></table>';
+  var table = tableStr.join('');
+  document.getElementById("tableMain").innerHTML=table;
+} 
+
+</script>
+</head>
+<body onload="myLoadComplete()">
+<div id="tableMain"></div>
+</body>
+</html>

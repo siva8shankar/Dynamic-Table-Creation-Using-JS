@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+td{padding:3px}
+th{background:green;color:#fff}
+tr:nth-child(even) {background: #cfcfcf}
+tr:nth-child(odd) {background: #FFF}
+</style>
+<script>
+function CreateTable() {   
+var data="ABCD123:Anantapur:400001:XXXXXX Technologies~ABCD234:Chennai:600002:XXX Inc~ABCD345:Bangalore:500003:XXXXX Pvt Ltd";
+  var tableStr = [];
+  var j = -1;
+var strRowsCount = data.split(/[~]/);
+ tableStr[++j] = '<table class="tftable" border="1"><thead><tr><th>Candidate Name</th><th>Address</th><th>Pincode</th><th>From</th></tr></thead><tbody>';
+  	for(var l=0; l < strRowsCount.length;l++){
+	tableStr[++j] = '<tr>';
+		var strRowLine = strRowsCount[l].split(/[:]/);
+  for (var i = 0; i < strRowLine.length; i++) {
+    tableStr[++j] = '<td>';
+    tableStr[++j] =  strRowLine[i];
+    tableStr[++j] = '</td>';
+  }
+  tableStr[++j] = '<tr>';
+  }
+  tableStr[++j] = '</tbody></table>';
+  var table = tableStr.join('');
+  document.getElementById("tableMain").innerHTML=table;
+} 
+</script>
+</head>
+<body onload="CreateTable()">
+<div id="tableMain"></div>
+
+
+</body>
+</html>
